@@ -1,3 +1,4 @@
+import 'package:amia_flutter/symptomChecker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -25,8 +26,27 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Hello World'),
       ),
-      body: Center(
-        child: HelloFromFirebase(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          HelloFromFirebase(),
+          Material(
+            elevation: 5.0,
+            borderRadius: BorderRadius.circular(30.0),
+            color: Color(0xFF1A237E),
+            child: MaterialButton(
+              minWidth: MediaQuery.of(context).size.width / 2,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SymptomChecker()));
+              },
+              child: Text("Let's Check Those Symptoms",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white)),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -37,7 +57,10 @@ class HelloFromFirebase extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       // Get document snapshot as a stream
-      stream: Firestore.instance.collection('collection').document('document').snapshots(),
+      stream: Firestore.instance
+          .collection('collection')
+          .document('document')
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Text('No data');
