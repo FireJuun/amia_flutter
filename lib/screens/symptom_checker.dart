@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 class Symptom {
   bool isChecked;
   String name;
+  IconData icon;
   symptomId id;
 
-  Symptom({this.isChecked = false, @required this.name, @required this.id});
+  Symptom({this.isChecked = false, this.icon = Icons.question_answer, @required this.name, @required this.id});
 }
 
 enum symptomId { cough, fever, vomiting, sob, chills, headaches, lostTaste }
@@ -26,9 +27,9 @@ class _SymptomChecker extends StatefulWidget {
 
 class _SymptomCheckerState extends State<_SymptomChecker> {
   List<Symptom> _symptomList = [
-    Symptom(name: 'Cough', id: symptomId.cough),
-    Symptom(name: 'Fever', id: symptomId.fever),
-    Symptom(name: 'SOB', id: symptomId.sob),
+    Symptom(name: 'Cough', id: symptomId.cough, icon: Icons.ac_unit),
+    Symptom(name: 'Fever', id: symptomId.fever, icon: Icons.accessibility),
+    Symptom(name: 'SOB', id: symptomId.sob, icon: Icons.queue),
     Symptom(name: 'Vomiting', id: symptomId.vomiting),
     Symptom(name: 'Chills', id: symptomId.chills),
     Symptom(name: 'Headaches', id: symptomId.headaches),
@@ -71,25 +72,29 @@ class _SymptomCheckerState extends State<_SymptomChecker> {
   }
 
   Widget _buildCheckbox(Symptom item) {
-    // return Center(child: Text(item.name));
-    return Card(
-      // margin: EdgeInsets.all(8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      color: Colors.grey[300],
-      child: Center(
-        child: ListTile(
-          contentPadding: EdgeInsets.all(4.0),
-          selected: item.isChecked,
-          onTap: () => _toggleSelected(item, !item.isChecked),
-          leading: Icon(Icons.sim_card),
-          title: Text(
-            item.name,
-            style: TextStyle(fontSize: 18),
-          ),
-          trailing: Checkbox(
-            value: item.isChecked,
-            onChanged: (bool value) => _toggleSelected(item, value),
-          ),
+    return GestureDetector(
+      onTap: () => _toggleSelected(item, !item.isChecked),
+      child: Container(
+        margin: EdgeInsets.all(8),
+        padding: EdgeInsets.only(left: 8),
+        decoration: BoxDecoration(border: Border.all(color: Colors.grey), borderRadius: BorderRadius.circular(16)),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Icon(
+              item.icon,
+              color: (item.isChecked) ? Colors.blue : null,
+            ),
+            Text(
+              item.name,
+              style: TextStyle(fontSize: 18, color: (item.isChecked) ? Colors.blue : null),
+            ),
+            Checkbox(
+              value: item.isChecked,
+              onChanged: (bool value) => _toggleSelected(item, value),
+            ),
+          ],
         ),
       ),
     );
