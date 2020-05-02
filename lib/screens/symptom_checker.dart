@@ -59,30 +59,40 @@ class _SymptomCheckerState extends State<_SymptomChecker> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Please Enter Your Symptoms'),
+          title: Text('Check-in'),
         ),
         //Containers are kind of like div in html
         //but can only contain one child widget
         body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 48,
-              ),
-              Text(
-                'Pick your symptoms',
-                style: TextStyle(fontSize: 32),
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              Expanded(
-                child: GridView(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2),
-                  children: <Widget>[..._symptomList.map((item) => _buildCheckbox(item))],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 48,
                 ),
-              ),
-            ],
+                Text(
+                  'Please select your symptoms',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Yesterday, you had cough, short of breath, and body aches.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                Expanded(
+                  child: GridView(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2),
+                    children: <Widget>[..._symptomList.map((item) => _buildCheckbox(item))],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

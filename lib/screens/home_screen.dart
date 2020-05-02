@@ -9,17 +9,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  PageController _controller;
-  @override
-  void initState() {
-    super.initState();
-    _controller = PageController();
-  }
+  PageController _controller = PageController();
 
   @override
   void dispose() {
     _controller.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -52,18 +46,41 @@ class HelloWorldScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         HelloFromFirebase(),
-        Material(
-          elevation: 5.0,
-          borderRadius: BorderRadius.circular(30.0),
-          color: Color(0xFF1A237E),
-          child: MaterialButton(
-            minWidth: MediaQuery.of(context).size.width / 2,
-            onPressed: () => Get.to(SymptomChecker()),
-            child:
-                Text("Let's Check Those Symptoms", textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
-          ),
-        ),
+        _materialButton(),
+        _raisedButton(),
       ],
+    );
+  }
+
+  Widget _materialButton() {
+    return Material(
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(30.0),
+      color: Color(0xFF042240),
+      child: MaterialButton(
+        minWidth: Get.width / 2,
+        onPressed: () => Get.to(SymptomChecker()),
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Text("Let's Check Those Symptoms",
+              textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20)),
+        ),
+      ),
+    );
+  }
+
+  Widget _raisedButton() {
+    return ButtonTheme(
+      minWidth: Get.width / 2,
+      buttonColor: Color(0xFF042240),
+      textTheme: ButtonTextTheme.primary,
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        elevation: 5.0,
+        padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+        onPressed: () => Get.to(SymptomChecker()),
+        child: Text("Let's Check Those Symptoms", style: TextStyle(fontSize: 20)),
+      ),
     );
   }
 }
