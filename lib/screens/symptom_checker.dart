@@ -3,13 +3,26 @@ import 'package:flutter/material.dart';
 class Symptom {
   bool isChecked;
   String name;
-  IconData icon;
+  Image image;
   symptomId id;
 
-  Symptom({this.isChecked = false, this.icon = Icons.question_answer, @required this.name, @required this.id});
+  Symptom({this.isChecked = false, @required this.image, @required this.name, @required this.id});
 }
 
-enum symptomId { cough, fever, vomiting, sob, chills, headaches, lostTaste }
+enum symptomId {
+  bodyAches,
+  cough,
+  diarrhea,
+  feelingIll,
+  headache,
+  runnyNose,
+  smell,
+  sneezing,
+  sob,
+  soreThroat,
+  taste,
+  vomiting
+}
 
 class SymptomChecker extends StatelessWidget {
   @override
@@ -27,13 +40,18 @@ class _SymptomChecker extends StatefulWidget {
 
 class _SymptomCheckerState extends State<_SymptomChecker> {
   List<Symptom> _symptomList = [
-    Symptom(name: 'Cough', id: symptomId.cough, icon: Icons.ac_unit),
-    Symptom(name: 'Fever', id: symptomId.fever, icon: Icons.accessibility),
-    Symptom(name: 'SOB', id: symptomId.sob, icon: Icons.queue),
-    Symptom(name: 'Vomiting', id: symptomId.vomiting),
-    Symptom(name: 'Chills', id: symptomId.chills),
-    Symptom(name: 'Headaches', id: symptomId.headaches),
-    Symptom(name: 'Lost Taste', id: symptomId.lostTaste),
+    Symptom(name: 'Body Aches', id: symptomId.cough, image: Image.asset('assets/icons/body_aches.png')),
+    Symptom(name: 'Cough', id: symptomId.cough, image: Image.asset('assets/icons/cough.png')),
+    Symptom(name: 'Diarrhea', id: symptomId.cough, image: Image.asset('assets/icons/diarrhea.png')),
+    Symptom(name: 'Feeling Ill', id: symptomId.cough, image: Image.asset('assets/icons/feeling_ill.png')),
+    Symptom(name: 'Headache', id: symptomId.cough, image: Image.asset('assets/icons/headache.png')),
+    Symptom(name: 'Runny Nose', id: symptomId.cough, image: Image.asset('assets/icons/runny_nose.png')),
+    Symptom(name: 'Weird/No Smell', id: symptomId.cough, image: Image.asset('assets/icons/smell.png')),
+    Symptom(name: 'Sneezing', id: symptomId.cough, image: Image.asset('assets/icons/sneezing.png')),
+    Symptom(name: 'Short of Breath', id: symptomId.cough, image: Image.asset('assets/icons/SOB.png')),
+    Symptom(name: 'Sore Throat', id: symptomId.cough, image: Image.asset('assets/icons/sore_throat.png')),
+    Symptom(name: 'Weird/No Taste', id: symptomId.cough, image: Image.asset('assets/icons/taste.png')),
+    Symptom(name: 'Vomiting', id: symptomId.cough, image: Image.asset('assets/icons/vomiting.png')),
   ];
 
   @override
@@ -81,14 +99,18 @@ class _SymptomCheckerState extends State<_SymptomChecker> {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Icon(
-              item.icon,
+            ImageIcon(
+              item.image.image,
               color: (item.isChecked) ? Colors.blue : null,
             ),
-            Text(
-              item.name,
-              style: TextStyle(fontSize: 18, color: (item.isChecked) ? Colors.blue : null),
+            Expanded(
+              child: Text(
+                item.name,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18, color: (item.isChecked) ? Colors.blue : null),
+              ),
             ),
             Checkbox(
               value: item.isChecked,
