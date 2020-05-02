@@ -15,7 +15,14 @@ class _SymptomChecker extends StatefulWidget {
 }
 
 class _SymptomCheckerState extends State<_SymptomChecker> {
-  var symptoms = Symptoms();
+  List<Symptom> _symptomList = [
+    Symptom(name: 'Cough', id: symptomId.cough),
+    Symptom(name: 'Fever', id: symptomId.fever),
+    Symptom(name: 'SOB', id: symptomId.sob),
+    Symptom(name: 'Chills', id: symptomId.chills),
+    Symptom(name: 'Headaches', id: symptomId.headaches),
+    Symptom(name: 'Lost Taste', id: symptomId.lostTaste),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -28,74 +35,12 @@ class _SymptomCheckerState extends State<_SymptomChecker> {
         //but can only contain one child widget
         body: SafeArea(
           child: Container(
-            color: Colors.white,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            alignment: Alignment.center,
+            // color: Colors.white,
+            child: Wrap(
+              spacing: 16.0,
               children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Text('cough'),
-                        Checkbox(
-                            value: symptoms.cough,
-                            onChanged: (bool value) =>
-                                setState(() => symptoms.cough = value))
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text('fever'),
-                        Checkbox(
-                            value: symptoms.fever,
-                            onChanged: (bool value) =>
-                                setState(() => symptoms.fever = value))
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text('Chills'),
-                        Checkbox(
-                            value: symptoms.chills,
-                            onChanged: (bool value) =>
-                                setState(() => symptoms.chills = value))
-                      ],
-                    ),
-                  ],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Text('Shortness of Breath'),
-                        Checkbox(
-                            value: symptoms.sob,
-                            onChanged: (bool value) =>
-                                setState(() => symptoms.sob = value))
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text('Headaches'),
-                        Checkbox(
-                            value: symptoms.headaches,
-                            onChanged: (bool value) =>
-                                setState(() => symptoms.headaches = value))
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text('Loss of Taste or Smell'),
-                        Checkbox(
-                            value: symptoms.lostTaste,
-                            onChanged: (bool value) =>
-                                setState(() => symptoms.lostTaste = value))
-                      ],
-                    ),
-                  ],
-                ),
+                ..._symptomList.map((item) => _buildCheckbox(item)),
               ],
             ),
           ),
@@ -103,22 +48,27 @@ class _SymptomCheckerState extends State<_SymptomChecker> {
       ),
     );
   }
+
+  Widget _buildCheckbox(Symptom symptom) {
+    return Container(
+      color: Colors.black12,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Checkbox(value: symptom.isChecked, onChanged: (bool value) => setState(() => symptom.isChecked = value)),
+          Text(symptom.name),
+        ],
+      ),
+    );
+  }
 }
 
-class Symptoms {
-  bool cough;
-  bool fever;
-  bool sob;
-  bool chills;
-  bool headaches;
-  bool lostTaste;
+class Symptom {
+  bool isChecked;
+  String name;
+  symptomId id;
 
-  Symptoms({
-    this.cough = false,
-    this.fever = false,
-    this.sob = false,
-    this.chills = false,
-    this.headaches = false,
-    this.lostTaste = false,
-  });
+  Symptom({this.isChecked = false, @required this.name, @required this.id});
 }
+
+enum symptomId { cough, fever, sob, chills, headaches, lostTaste }
