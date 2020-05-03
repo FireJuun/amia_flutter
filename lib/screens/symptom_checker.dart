@@ -1,59 +1,8 @@
+import 'package:amia_flutter/services/services.dart';
 import 'package:flutter/material.dart';
-
-class Symptom {
-  bool isChecked;
-  String name;
-  Image image;
-  symptomId id;
-
-  Symptom({this.isChecked = false, @required this.image, @required this.name, @required this.id});
-}
-
-enum symptomId {
-  bodyAches,
-  cough,
-  diarrhea,
-  feelingIll,
-  headache,
-  runnyNose,
-  smell,
-  sneezing,
-  sob,
-  soreThroat,
-  taste,
-  vomiting
-}
+import 'package:get/get.dart';
 
 class SymptomChecker extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: _SymptomChecker(),
-    );
-  }
-}
-
-class _SymptomChecker extends StatefulWidget {
-  @override
-  _SymptomCheckerState createState() => _SymptomCheckerState();
-}
-
-class _SymptomCheckerState extends State<_SymptomChecker> {
-  List<Symptom> _symptomList = [
-    Symptom(name: 'Body Aches', id: symptomId.cough, image: Image.asset('assets/icons/body_aches.png')),
-    Symptom(name: 'Cough', id: symptomId.cough, image: Image.asset('assets/icons/cough.png')),
-    Symptom(name: 'Diarrhea', id: symptomId.cough, image: Image.asset('assets/icons/diarrhea.png')),
-    Symptom(name: 'Feeling Ill', id: symptomId.cough, image: Image.asset('assets/icons/feeling_ill.png')),
-    Symptom(name: 'Headache', id: symptomId.cough, image: Image.asset('assets/icons/headache.png')),
-    Symptom(name: 'Runny Nose', id: symptomId.cough, image: Image.asset('assets/icons/runny_nose.png')),
-    Symptom(name: 'Weird/No Smell', id: symptomId.cough, image: Image.asset('assets/icons/smell.png')),
-    Symptom(name: 'Sneezing', id: symptomId.cough, image: Image.asset('assets/icons/sneezing.png')),
-    Symptom(name: 'Short of Breath', id: symptomId.cough, image: Image.asset('assets/icons/SOB.png')),
-    Symptom(name: 'Sore Throat', id: symptomId.cough, image: Image.asset('assets/icons/sore_throat.png')),
-    Symptom(name: 'Weird/No Taste', id: symptomId.cough, image: Image.asset('assets/icons/taste.png')),
-    Symptom(name: 'Vomiting', id: symptomId.cough, image: Image.asset('assets/icons/vomiting.png')),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -63,45 +12,57 @@ class _SymptomCheckerState extends State<_SymptomChecker> {
         ),
         //Containers are kind of like div in html
         //but can only contain one child widget
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 48,
-                ),
-                Text(
-                  'Please select your symptoms',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Yesterday, you had cough, short of breath, and body aches.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                Expanded(
-                  child: GridView(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2),
-                    children: <Widget>[..._symptomList.map((item) => _buildCheckbox(item))],
+        body: GetBuilder<DataService>(
+          // Required call ONLY ONCE, with get
+          init: DataService(),
+          builder: (data) => SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 48,
                   ),
-                ),
-              ],
+                  Text(
+                    'Please select your symptoms',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Yesterday, you had cough, short of breath, and body aches.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  Expanded(
+                    child: GridView(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2),
+                      children: <Widget>[...data.symptomList.map((item) => _SymptomCheckbox(item: item))],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
+}
 
-  Widget _buildCheckbox(Symptom item) {
+class _SymptomCheckbox extends StatelessWidget {
+  final Symptom item;
+
+  const _SymptomCheckbox({Key key, this.item}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _toggleSelected(item, !item.isChecked),
+      // DataService.to is how we call the service in different widgets
+      onTap: () => DataService.to.toggleSelected(item, !item.isChecked),
       child: Container(
         margin: EdgeInsets.all(8),
         padding: EdgeInsets.only(left: 8),
@@ -124,13 +85,11 @@ class _SymptomCheckerState extends State<_SymptomChecker> {
             ),
             Checkbox(
               value: item.isChecked,
-              onChanged: (bool value) => _toggleSelected(item, value),
+              onChanged: (bool value) => DataService.to.toggleSelected(item, value),
             ),
           ],
         ),
       ),
     );
   }
-
-  void _toggleSelected(Symptom item, bool value) => setState(() => item.isChecked = value);
 }
