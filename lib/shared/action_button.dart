@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ActionButton extends StatelessWidget {
-  const ActionButton({Key key, @required this.title, @required this.whenPressed}) : super(key: key);
+class SharedActionButton extends StatelessWidget {
+  const SharedActionButton({Key key, @required this.title, @required this.whenPressed}) : super(key: key);
 
   final String title;
   final void Function() whenPressed;

@@ -18,29 +18,12 @@ class SymptomChecker extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: <Widget>[
-                SizedBox(
-                  height: 48,
-                ),
-                Text(
-                  'Please select your symptoms',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Yesterday, you had cough, short of breath, and body aches.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                Expanded(
-                  child: GridView(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2),
-                    children: <Widget>[...data.symptomList.map((item) => _SymptomCheckbox(item: item))],
-                  ),
-                ),
+                SizedBox(height: 48),
+                _buildHeader(),
+                SizedBox(height: 24),
+                _buildSymptomCheckboxes(data),
+                SizedBox(height: 24),
+                _buildSubmitButton(),
               ],
             ),
           ),
@@ -48,51 +31,41 @@ class SymptomChecker extends StatelessWidget {
       ),
     );
   }
-}
 
-class _SymptomCheckbox extends StatelessWidget {
-  final Symptom item;
-
-  const _SymptomCheckbox({Key key, this.item}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      // DataService.to is how we call the service in different widgets
-      onTap: () => DataService.to.toggleSelected(item, !item.isChecked),
-      child: Container(
-        margin: EdgeInsets.all(8),
-        padding: EdgeInsets.only(left: 8),
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Get.theme.disabledColor,
-            ),
-            borderRadius: BorderRadius.circular(16)),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            ImageIcon(
-              item.image.image,
-              color: (item.isChecked) ? Get.theme.primaryColor : Get.theme.disabledColor,
-            ),
-            Expanded(
-              child: Text(
-                item.name,
-                textAlign: TextAlign.center,
-                style: Get.theme.textTheme.subtitle
-                    .apply(color: (item.isChecked) ? Get.theme.primaryColor : Get.theme.disabledColor),
-              ),
-            ),
-            Checkbox(
-              value: item.isChecked,
-              activeColor: Get.theme.primaryColor,
-              onChanged: (bool value) => DataService.to.toggleSelected(item, value),
-            ),
-          ],
+  Widget _buildHeader() {
+    return Column(
+      children: <Widget>[
+        Text(
+          'Please select your symptoms',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
         ),
+        SizedBox(height: 8),
+        Text(
+          'Yesterday, you had cough, short of breath, and body aches.',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+        )
+      ],
+    );
+  }
+
+  Widget _buildSymptomCheckboxes(DataService data) {
+    return Expanded(
+      child: GridView(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2),
+        children: <Widget>[...data.symptomList.map((item) => SharedCheckbox(item: item))],
       ),
+    );
+  }
+
+  Widget _buildSubmitButton() {
+    return SharedActionButton(
+      title: 'Submit',
+      whenPressed: () {
+        Get.snackbar('Check-in complete', 'Be sure to check-in tomorrow as well!');
+        Get.back();
+      },
     );
   }
 }
