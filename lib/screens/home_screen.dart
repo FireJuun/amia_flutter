@@ -44,41 +44,12 @@ class HelloWorldScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         HelloFromFirebase(),
-        _materialButton(),
-        _raisedButton("Let's Check Those Symptoms", () => Get.to(SymptomChecker())),
-      ],
-    );
-  }
-
-  Widget _materialButton() {
-    return Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xFF042240),
-      child: MaterialButton(
-        minWidth: Get.width / 2,
-        onPressed: () => Get.to(SymptomChecker()),
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Text("Let's Check Those Symptoms",
-              textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20)),
+        ActionButton(title: 'OK', whenPressed: () {}),
+        ActionButton(
+          title: "Let's Check Those Symptoms",
+          whenPressed: () => Get.to(SymptomChecker()),
         ),
-      ),
-    );
-  }
-
-  Widget _raisedButton(String title, void Function() whenPressed) {
-    return ButtonTheme(
-      minWidth: Get.width / 2,
-      buttonColor: Color(0xFF042240),
-      textTheme: ButtonTextTheme.primary,
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        elevation: 5.0,
-        padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-        onPressed: whenPressed,
-        child: Text(title, style: TextStyle(fontSize: 20)),
-      ),
+      ],
     );
   }
 }

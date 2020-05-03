@@ -1,6 +1,5 @@
 import 'package:amia_flutter/services/services.dart';
 import 'package:amia_flutter/shared/shared.dart';
-import 'package:amia_flutter/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -64,8 +63,11 @@ class _SymptomCheckbox extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.all(8),
         padding: EdgeInsets.only(left: 8),
-        decoration:
-            BoxDecoration(border: Border.all(color: AppColors.disabled), borderRadius: BorderRadius.circular(16)),
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: Get.theme.disabledColor,
+            ),
+            borderRadius: BorderRadius.circular(16)),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -73,18 +75,19 @@ class _SymptomCheckbox extends StatelessWidget {
           children: <Widget>[
             ImageIcon(
               item.image.image,
-              color: (item.isChecked) ? AppColors.primary : AppColors.disabled,
+              color: (item.isChecked) ? Get.theme.primaryColor : Get.theme.disabledColor,
             ),
             Expanded(
               child: Text(
                 item.name,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, color: (item.isChecked) ? AppColors.primary : AppColors.disabled),
+                style: Get.theme.textTheme.subtitle
+                    .apply(color: (item.isChecked) ? Get.theme.primaryColor : Get.theme.disabledColor),
               ),
             ),
             Checkbox(
               value: item.isChecked,
-              activeColor: AppColors.primary,
+              activeColor: Get.theme.primaryColor,
               onChanged: (bool value) => DataService.to.toggleSelected(item, value),
             ),
           ],
