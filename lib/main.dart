@@ -1,3 +1,4 @@
+import 'package:amia_flutter/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,10 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        textTheme: TextTheme(body1: TextStyle(fontSize: 36)),
-      ),
+      theme: AppTheme.build(),
       home: HomeScreen(),
     );
   }

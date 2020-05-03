@@ -20,9 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Hello World'),
-      ),
+      appBar: SharedAppBar(title: 'Hello World!'),
       body: PageView(
         controller: _controller,
         children: <Widget>[
