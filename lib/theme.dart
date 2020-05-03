@@ -11,7 +11,7 @@ ThemeData appTheme() {
     disabledColor: _AppColors.disabled,
     errorColor: _AppColors.error,
 
-    // Themes with _build functions
+    // Customize Themes
     appBarTheme: _buildAppBarTheme(textTheme),
     iconTheme: iconTheme,
     primaryIconTheme: iconTheme.copyWith(color: _AppColors.primary),
@@ -28,6 +28,17 @@ ThemeData appTheme() {
   );
 }
 
+/// ******* Colors *******
+class _AppColors {
+  // Core
+  // static const Color primary = Colors.green;
+  static const Color primary = Color(0xFF042240);
+  static const Color secondary = Color(0xFF018786);
+  static const Color error = Color(0xFFFF0C3E);
+  static const Color disabled = Color(0xFF9E9E9E);
+}
+
+/// ******* Custom Themes *******
 AppBarTheme _buildAppBarTheme(TextTheme textTheme) {
   return AppBarTheme(
     textTheme: textTheme.apply(displayColor: _AppColors.primary),
@@ -38,7 +49,7 @@ IconThemeData _buildIconTheme() {
   return const IconThemeData(color: _AppColors.primary, size: 32);
 }
 
-// *** Set Customization Below ***
+/// ******* Text Theme *******
 TextTheme _buildTextTheme() {
   return TextTheme(
     // Using default Material theme system
@@ -50,50 +61,42 @@ TextTheme _buildTextTheme() {
     display2: _AppTypography.h3,
     display1: _AppTypography.h4,
     headline: _AppTypography.h5,
-    // used for input text, list tile title
     subhead: _AppTypography.h6,
-    // Used for app bar and dialog titles
     title: _AppTypography.subtitle1,
     subtitle: _AppTypography.subtitle2,
-    //
     body1: _AppTypography.body1,
     body2: _AppTypography.body2,
-    // used for input error text
     caption: _AppTypography.caption,
     button: _AppTypography.button,
     overline: _AppTypography.overline,
   );
 }
 
-class _AppColors {
-  // Core
-  // static const Color primary = Colors.green;
-  static const Color primary = Color(0xFF042240);
-  static const Color secondary = Color(0xFF018786);
-  static const Color error = Color(0xFFFF0C3E);
-  static const Color disabled = Color(0xFF9E9E9E);
-}
-
+/// ******* Custom Text *******
 class _AppTypography {
   static const TextStyle h1 = TextStyle(fontSize: 96, fontWeight: FontWeight.w100);
   static const TextStyle h2 = TextStyle(fontSize: 60, fontWeight: FontWeight.w100);
   static const TextStyle h3 = TextStyle(fontSize: 48, fontWeight: FontWeight.normal);
-  static const TextStyle h4 = TextStyle(fontSize: 34, fontWeight: FontWeight.normal);
-  static const TextStyle h5 = TextStyle(fontSize: 24, fontWeight: FontWeight.normal);
+  static const TextStyle h4 = TextStyle(fontSize: 32, fontWeight: FontWeight.normal);
 
-// Used for app bar and dialog titles
-  static const TextStyle h6 = TextStyle(fontSize: 20, fontWeight: FontWeight.w400);
+  // Good day / Hello world text
+  static const TextStyle h5 = TextStyle(fontSize: 32, fontWeight: FontWeight.w800);
 
-// used for input text, list tile, title
+  // AppBar
+  static const TextStyle h6 = TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
+
+  // ListTitle overrides
   static const TextStyle subtitle1 = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
-  static const TextStyle subtitle2 = TextStyle(fontSize: 18, fontWeight: FontWeight.w400);
+  static const TextStyle subtitle2 = TextStyle(fontSize: 18, fontWeight: FontWeight.w300);
 
-  // Default for a Text Widget
+  // Default: Text Widget
   static const TextStyle body1 = TextStyle(fontSize: 30, fontWeight: FontWeight.normal);
   static const TextStyle body2 = TextStyle(fontSize: 14, fontWeight: FontWeight.normal);
 
-// used for input error text
+  // Default: Input error text
   static const TextStyle caption = TextStyle(fontSize: 12, fontWeight: FontWeight.normal);
+
+  // Default: Button
   static const TextStyle button = TextStyle(fontSize: 20, fontWeight: FontWeight.w400);
   static const TextStyle overline = TextStyle(fontSize: 10, fontWeight: FontWeight.normal);
 }

@@ -11,7 +11,7 @@ class SharedCheckbox extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       // DataService.to is how we call the service in different widgets
-      onTap: () => DataService.to.toggleSelected(item, !item.isChecked),
+      onTap: () => SymptomService.to.toggleSelected(item, !item.isChecked),
       child: Container(
         margin: EdgeInsets.all(8),
         padding: EdgeInsets.only(left: 8),
@@ -36,7 +36,7 @@ class SharedCheckbox extends StatelessWidget {
             Checkbox(
               value: item.isChecked,
               activeColor: Get.theme.primaryColor,
-              onChanged: (bool value) => DataService.to.toggleSelected(item, value),
+              onChanged: (bool value) => SymptomService.to.toggleSelected(item, value),
             ),
           ],
         ),

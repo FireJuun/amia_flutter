@@ -1,2 +1,2 @@
-export 'data.model.dart';
-export 'data.service.dart';
+export 'symptom.model.dart';
+export 'symptom.service.dart';

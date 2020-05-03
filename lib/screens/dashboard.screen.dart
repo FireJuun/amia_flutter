@@ -1,3 +1,4 @@
+import 'package:amia_flutter/screens/checkin.screen.dart';
 import 'package:amia_flutter/shared/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,19 +30,40 @@ class DashboardScreen extends StatelessWidget {
 
   Widget _buildBody() {
     return ListView(
-      // padding: EdgeInsets.symmetric(vertical: 12.0),
-
       children: <Widget>[
-        _listItem(title: 'Check-in', subtitle: 'subtitle'),
-        _listItem(title: 'History', subtitle: 'subtitle'),
-        _listItem(title: 'Check my vital circles', subtitle: 'subtitle'),
-        _listItem(title: 'Resources', subtitle: 'subtitle'),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 28.0),
+          child: Text('Good morning, AMIA', style: Get.theme.textTheme.headline, textAlign: TextAlign.center),
+        ),
+        _listItem(
+            icon: Icons.check_circle_outline,
+            title: 'Check-in',
+            subtitle: 'Log your symptoms and temperature',
+            isGrey: true,
+            onPressed: () => Get.to(CheckinScreen())),
+        _listItem(
+          icon: Icons.calendar_today,
+          title: 'History',
+          subtitle: 'Look at your previous symptoms and edit records',
+        ),
+        _listItem(
+          icon: Icons.people,
+          title: 'Check my vital circles',
+          subtitle: 'See how those around you are doing',
+        ),
+        _listItem(
+          icon: Icons.info,
+          title: 'Resources',
+          subtitle: 'Helpful articles and tips',
+        ),
       ],
     );
   }
 
-  Widget _listItem({@required String title, @required String subtitle}) {
+  Widget _listItem(
+      {@required IconData icon, @required String title, @required String subtitle, bool isGrey, void onPressed()}) {
     final _textTheme = Get.theme.textTheme;
+    isGrey = isGrey ?? false;
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
@@ -49,12 +71,17 @@ class DashboardScreen extends StatelessWidget {
       decoration:
           BoxDecoration(border: Border.all(color: Get.theme.disabledColor), borderRadius: BorderRadius.circular(16)),
       child: ListTile(
-        leading: Icon(Icons.check_circle_outline),
+        leading: Icon(
+          icon,
+          size: 24,
+          color: (isGrey) ? Get.theme.disabledColor : Get.theme.primaryColor,
+        ),
         title: Text(title, style: _textTheme.title),
         subtitle: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(subtitle, style: _textTheme.subtitle),
         ),
+        onTap: onPressed,
       ),
     );
   }

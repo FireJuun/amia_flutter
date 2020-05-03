@@ -1,3 +1,4 @@
+import 'package:amia_flutter/screens/screens.dart';
 import 'package:amia_flutter/services/services.dart';
 import 'package:amia_flutter/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +8,22 @@ class CheckinScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SharedAppBar(title: 'Check-in'),
+      appBar: SharedAppBar(
+        title: 'Check-in',
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(
+                Icons.close,
+                size: Get.theme.iconTheme.size,
+              ),
+              onPressed: () => Get.offAll(HomeScreen()))
+        ],
+      ),
       //Containers are kind of like div in html
       //but can only contain one child widget
-      body: GetBuilder<DataService>(
+      body: GetBuilder<SymptomService>(
         // Required call ONLY ONCE, with get
-        init: DataService(),
+        init: SymptomService(),
         builder: (data) => SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -50,7 +61,7 @@ class CheckinScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSymptomCheckboxes(DataService data) {
+  Widget _buildSymptomCheckboxes(SymptomService data) {
     return Expanded(
       child: GridView(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2),
@@ -62,7 +73,7 @@ class CheckinScreen extends StatelessWidget {
   Widget _buildSubmitButton() {
     return SharedActionButton(
       title: 'Submit',
-      whenPressed: () {
+      onPressed: () {
         Get.snackbar('Check-in complete', 'Be sure to check-in tomorrow as well!');
         Get.back();
       },

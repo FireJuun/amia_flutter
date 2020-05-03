@@ -7,7 +7,7 @@ class SharedAppBar extends AppBar {
             backgroundColor: Colors.transparent,
             centerTitle: true,
             elevation: 0,
-            title: title != null ? Text(title, style: Get.theme.textTheme.display1) : null,
+            title: title != null ? Text(title, style: Get.theme.textTheme.subhead) : null,
             actions: actions,
             leading: leading);
 }

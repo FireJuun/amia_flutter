@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SharedActionButton extends StatelessWidget {
-  const SharedActionButton({Key key, @required this.title, @required this.whenPressed}) : super(key: key);
+  const SharedActionButton({Key key, @required this.title, @required this.onPressed}) : super(key: key);
 
   final String title;
-  final void Function() whenPressed;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SharedActionButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         elevation: 5.0,
         padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-        onPressed: whenPressed,
+        onPressed: onPressed,
         child: Text(title),
       ),
     );

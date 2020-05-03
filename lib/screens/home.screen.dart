@@ -7,20 +7,18 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SharedAppBar(
-        title: 'AMIA Demo',
-      ),
+      appBar: SharedAppBar(title: 'AMIA Demo'),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             SharedActionButton(
               title: 'Dashboard',
-              whenPressed: () => Get.to(DashboardScreen()),
+              onPressed: () => Get.to(DashboardScreen()),
             ),
             SharedActionButton(
               title: "Check-In",
-              whenPressed: () => Get.to(CheckinScreen()),
+              onPressed: () => Get.to(CheckinScreen()),
             ),
             SharedFirebaseHello(),
           ],
