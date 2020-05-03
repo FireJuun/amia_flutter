@@ -2,36 +2,45 @@ import 'package:flutter/material.dart';
 
 ThemeData appTheme() {
   final TextTheme textTheme = _buildTextTheme();
+  final IconThemeData iconTheme = _buildIconTheme();
 
   return ThemeData.light().copyWith(
-      appBarTheme: _buildAppBarTheme(textTheme),
-      primaryColor: _AppColors.primary,
-      accentColor: _AppColors.secondary,
-      disabledColor: _AppColors.disabled,
-      errorColor: _AppColors.error,
+    // Set default colors
+    primaryColor: _AppColors.primary,
+    accentColor: _AppColors.secondary,
+    disabledColor: _AppColors.disabled,
+    errorColor: _AppColors.error,
 
-      // Set default colors
-      textTheme: textTheme.apply(
-        displayColor: _AppColors.primary,
-        bodyColor: _AppColors.primary,
-      ),
-      buttonTheme: ButtonThemeData(
-        buttonColor: _AppColors.primary,
-        textTheme: ButtonTextTheme.primary,
-      ));
+    // Themes with _build functions
+    appBarTheme: _buildAppBarTheme(textTheme),
+    iconTheme: iconTheme,
+    primaryIconTheme: iconTheme.copyWith(color: _AppColors.primary),
+
+    // Misc
+    buttonTheme: ButtonThemeData(
+      buttonColor: _AppColors.primary,
+      textTheme: ButtonTextTheme.primary,
+    ),
+    textTheme: textTheme.apply(
+      displayColor: _AppColors.primary,
+      bodyColor: _AppColors.primary,
+    ),
+  );
 }
 
 AppBarTheme _buildAppBarTheme(TextTheme textTheme) {
   return AppBarTheme(
-    actionsIconTheme: const IconThemeData(color: _AppColors.primary),
-    iconTheme: const IconThemeData(color: _AppColors.primary),
     textTheme: textTheme.apply(displayColor: _AppColors.primary),
   );
 }
 
+IconThemeData _buildIconTheme() {
+  return const IconThemeData(color: _AppColors.primary, size: 32);
+}
+
 // *** Set Customization Below ***
 TextTheme _buildTextTheme() {
-  return const TextTheme(
+  return TextTheme(
     // Using default Material theme system
     // spec: https://material.io/design/typography/the-type-system.html#type-scale
     // on next stable release of Dart, display4 will be renamed to headline 1,
@@ -76,9 +85,11 @@ class _AppTypography {
   static const TextStyle h6 = TextStyle(fontSize: 20, fontWeight: FontWeight.w400);
 
 // used for input text, list tile, title
-  static const TextStyle subtitle1 = TextStyle(fontSize: 16, fontWeight: FontWeight.normal);
-  static const TextStyle subtitle2 = TextStyle(fontSize: 16, fontWeight: FontWeight.w400);
-  static const TextStyle body1 = TextStyle(fontSize: 16, fontWeight: FontWeight.normal);
+  static const TextStyle subtitle1 = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+  static const TextStyle subtitle2 = TextStyle(fontSize: 18, fontWeight: FontWeight.w400);
+
+  // Default for a Text Widget
+  static const TextStyle body1 = TextStyle(fontSize: 30, fontWeight: FontWeight.normal);
   static const TextStyle body2 = TextStyle(fontSize: 14, fontWeight: FontWeight.normal);
 
 // used for input error text
