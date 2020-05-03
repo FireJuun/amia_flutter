@@ -3,7 +3,7 @@ import 'package:amia_flutter/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SymptomChecker extends StatelessWidget {
+class CheckinScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -14,11 +14,11 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            HelloFromFirebase(),
+            SharedFirebaseHello(),
             SharedActionButton(title: 'OK', whenPressed: () {}),
             SharedActionButton(
               title: "Let's Check Those Symptoms",
-              whenPressed: () => Get.to(SymptomChecker()),
+              whenPressed: () => Get.to(CheckinScreen()),
             ),
           ],
         ),

@@ -18,7 +18,7 @@ class SharedActionButton extends StatelessWidget {
         elevation: 5.0,
         padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
         onPressed: whenPressed,
-        child: Text(title, style: TextStyle(fontSize: 20)),
+        child: Text(title),
       ),
     );
   }

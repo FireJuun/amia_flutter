@@ -1,2 +1,2 @@
-export 'home_screen.dart';
-export 'symptom_checker.dart';
+export 'home.screen.dart';
+export 'checkin.screen.dart';

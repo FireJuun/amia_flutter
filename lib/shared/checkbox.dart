@@ -15,15 +15,11 @@ class SharedCheckbox extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.all(8),
         padding: EdgeInsets.only(left: 8),
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Get.theme.disabledColor,
-            ),
-            borderRadius: BorderRadius.circular(16)),
+        decoration:
+            BoxDecoration(border: Border.all(color: Get.theme.disabledColor), borderRadius: BorderRadius.circular(16)),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             ImageIcon(
               item.image.image,

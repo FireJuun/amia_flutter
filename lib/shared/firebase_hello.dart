@@ -1,19 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class HelloFromFirebase extends StatelessWidget {
+class SharedFirebaseHello extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final TextStyle _textStyle = Get.theme.textTheme.display3;
+
     return StreamBuilder(
       // Get document snapshot as a stream
       stream: Firestore.instance.collection('collection').document('document').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return Text('No data');
+          return Text('No data', style: _textStyle);
         }
         // find the field named 'field', return this
         Map<String, dynamic> documentFields = snapshot.data.data;
-        return Text(documentFields['field']);
+        return Text(documentFields['field'], style: _textStyle, textAlign: TextAlign.center);
       },
     );
   }

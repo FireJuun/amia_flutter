@@ -83,6 +83,6 @@ class _AppTypography {
 
 // used for input error text
   static const TextStyle caption = TextStyle(fontSize: 12, fontWeight: FontWeight.normal);
-  static const TextStyle button = TextStyle(fontSize: 14, fontWeight: FontWeight.w400);
+  static const TextStyle button = TextStyle(fontSize: 20, fontWeight: FontWeight.w400);
   static const TextStyle overline = TextStyle(fontSize: 10, fontWeight: FontWeight.normal);
 }
