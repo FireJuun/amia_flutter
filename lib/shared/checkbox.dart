@@ -21,8 +21,8 @@ class SharedCheckbox extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            ImageIcon(
-              item.image.image,
+            Icon(
+              item.icon,
               color: (item.isChecked) ? Get.theme.primaryColor : Get.theme.disabledColor,
             ),
             Expanded(
@@ -36,6 +36,8 @@ class SharedCheckbox extends StatelessWidget {
             Checkbox(
               value: item.isChecked,
               activeColor: Get.theme.primaryColor,
+              focusColor: Colors.green,
+              // hoverColor: Colors.green,
               onChanged: (bool value) => SymptomService.to.toggleSelected(item, value),
             ),
           ],

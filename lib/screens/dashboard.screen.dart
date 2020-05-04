@@ -1,6 +1,7 @@
 import 'package:amia_flutter/screens/checkin.screen.dart';
 import 'package:amia_flutter/shared/app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -38,23 +39,23 @@ class DashboardScreen extends StatelessWidget {
         _listItem(
             icon: Icons.check_circle_outline,
             title: 'Check-in',
-            subtitle: 'Log your symptoms and temperature',
+            subtitle: 'Enter your temperature, symptoms, and relevant tests',
             isGrey: true,
             onPressed: () => Get.to(CheckinScreen())),
         _listItem(
-          icon: Icons.calendar_today,
+          icon: FlutterIcons.calendar_oct,
           title: 'History',
-          subtitle: 'Look at your previous symptoms and edit records',
+          subtitle: 'See/edit your past entries',
         ),
         _listItem(
-          icon: Icons.people,
-          title: 'Check my vital circles',
-          subtitle: 'See how those around you are doing',
+          icon: FlutterIcons.map_clock_outline_mco,
+          title: 'Contact tracing',
+          subtitle: 'Toggle method:\nlocation / bluetooth / both / off',
         ),
         _listItem(
-          icon: Icons.info,
-          title: 'Resources',
-          subtitle: 'Helpful articles and tips',
+          icon: FlutterIcons.information_variant_mco,
+          title: 'Info',
+          subtitle: 'Learn more about COVID-19',
         ),
       ],
     );
@@ -68,8 +69,8 @@ class DashboardScreen extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-      decoration:
-          BoxDecoration(border: Border.all(color: Get.theme.disabledColor), borderRadius: BorderRadius.circular(16)),
+      decoration: BoxDecoration(
+          border: Border.all(color: Get.theme.unselectedWidgetColor), borderRadius: BorderRadius.circular(16)),
       child: ListTile(
         leading: Icon(
           icon,

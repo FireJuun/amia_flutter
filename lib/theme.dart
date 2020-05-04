@@ -21,6 +21,7 @@ ThemeData appTheme() {
       buttonColor: _AppColors.primary,
       textTheme: ButtonTextTheme.primary,
     ),
+    unselectedWidgetColor: _AppColors.disabledWidget,
     textTheme: textTheme.apply(
       displayColor: _AppColors.primary,
       bodyColor: _AppColors.primary,
@@ -34,8 +35,9 @@ class _AppColors {
   // static const Color primary = Colors.green;
   static const Color primary = Color(0xFF042240);
   static const Color secondary = Color(0xFF018786);
-  static const Color error = Color(0xFFFF0C3E);
-  static const Color disabled = Color(0xFF9E9E9E);
+  static Color error = Colors.red;
+  static Color disabled = Colors.grey[500];
+  static Color disabledWidget = Colors.grey[300];
 }
 
 /// ******* Custom Themes *******
