@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 
-class CheckinScreen extends StatelessWidget {
+class CheckinScreen extends StatefulWidget {
+  @override
+  _CheckinScreenState createState() => _CheckinScreenState();
+}
+
+class _CheckinScreenState extends State<CheckinScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,22 +26,18 @@ class CheckinScreen extends StatelessWidget {
       ),
       //Containers are kind of like div in html
       //but can only contain one child widget
-      body: GetBuilder<SymptomService>(
-        // Required call ONLY ONCE, with get
-        init: SymptomService(),
-        builder: (data) => SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 48),
-                _buildHeader(),
-                SizedBox(height: 24),
-                _buildSymptomCheckboxes(data),
-                SizedBox(height: 24),
-                _buildSubmitButton(),
-              ],
-            ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 48),
+              _buildHeader(),
+              SizedBox(height: 24),
+              _buildSymptomCheckboxes(),
+              SizedBox(height: 24),
+              _buildSubmitButton(),
+            ],
           ),
         ),
       ),
@@ -62,11 +63,11 @@ class CheckinScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSymptomCheckboxes(SymptomService data) {
+  Widget _buildSymptomCheckboxes() {
     return Expanded(
       child: GridView(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2),
-        children: <Widget>[...data.symptomList.map((item) => SharedCheckbox(item: item))],
+        children: <Widget>[..._symptomList.map((item) => _buildCheckbox(item: item))],
       ),
     );
   }
@@ -80,18 +81,47 @@ class CheckinScreen extends StatelessWidget {
       },
     );
   }
-}
 
-class Symptom {
-  bool isChecked;
-  String name;
-  IconData icon;
+  // todo: extract into shared widget
+  Widget _buildCheckbox({@required Symptom item}) {
+    return GestureDetector(
+      onTap: () => setState(() => toggleSelected(item, !item.isChecked)),
+      child: Container(
+        margin: EdgeInsets.all(8),
+        padding: EdgeInsets.only(left: 8),
+        decoration:
+            BoxDecoration(border: Border.all(color: Get.theme.disabledColor), borderRadius: BorderRadius.circular(16)),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Icon(
+              item.icon,
+              color: (item.isChecked) ? Get.theme.primaryColor : Get.theme.disabledColor,
+            ),
+            Expanded(
+              child: Text(
+                item.name,
+                textAlign: TextAlign.center,
+                style: Get.theme.textTheme.subtitle
+                    .apply(color: (item.isChecked) ? Get.theme.primaryColor : Get.theme.disabledColor),
+              ),
+            ),
+            Checkbox(
+              value: item.isChecked,
+              activeColor: Get.theme.primaryColor,
+              focusColor: Colors.green,
+              // hoverColor: Colors.green,
+              onChanged: (bool value) => setState(() => toggleSelected(item, value)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
-  Symptom({this.isChecked = false, @required this.icon, @required this.name});
-}
-
-class SymptomService extends GetController {
-  static SymptomService get to => Get.find();
+  // todo: extract into service
+  // ! Current management requires stateful widget
 
   List<Symptom> _symptomList = [
     Symptom(
@@ -148,6 +178,13 @@ class SymptomService extends GetController {
 
   void toggleSelected(Symptom item, bool value) {
     item.isChecked = !item.isChecked;
-    update(this);
   }
+}
+
+class Symptom {
+  bool isChecked;
+  String name;
+  IconData icon;
+
+  Symptom({this.isChecked = false, @required this.icon, @required this.name});
 }
