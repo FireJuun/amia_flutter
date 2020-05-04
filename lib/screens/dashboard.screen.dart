@@ -1,6 +1,5 @@
 import 'package:amia_flutter/shared/app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -31,47 +30,18 @@ class DashboardScreen extends StatelessWidget {
   Widget _buildBody() {
     return ListView(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 28.0),
-          child: Text('Good morning, AMIA', style: Get.theme.textTheme.display2, textAlign: TextAlign.center),
-        ),
-        _listItem(
-          icon: Icons.check_circle_outline,
-          title: 'Check-in',
-          subtitle: 'Enter your temperature, symptoms, and relevant tests',
-        ),
-        _listItem(
-          icon: FlutterIcons.calendar_oct,
-          title: 'History',
-          subtitle: 'See/edit your past entries',
-        ),
-        _listItem(
-          icon: FlutterIcons.map_clock_outline_mco,
-          title: 'Contact tracing',
-          subtitle: 'Toggle method:\nlocation / bluetooth / both / off',
-        ),
-        _listItem(
-          icon: FlutterIcons.information_variant_mco,
-          title: 'Info',
-          subtitle: 'Learn more about COVID-19',
+        Text('Good morning, AMIA', style: Get.theme.textTheme.display2, textAlign: TextAlign.center),
+        Text('Check-in'),
+        Text('History'),
+        Text('Contact tracing'),
+        Text('Info'),
+        ListTile(
+          leading: Text('leading'),
+          title: Text('ListTile'),
+          subtitle: Text('Subtitle'),
+          trailing: Text('trailing'),
         ),
       ],
-    );
-  }
-
-  Widget _listItem({@required IconData icon, @required String title, @required String subtitle}) {
-    final _textTheme = Get.theme.textTheme;
-
-    return ListTile(
-      leading: Icon(
-        icon,
-        size: 24,
-      ),
-      title: Text(title, style: _textTheme.title),
-      subtitle: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Text(subtitle, style: _textTheme.subtitle),
-      ),
     );
   }
 }
