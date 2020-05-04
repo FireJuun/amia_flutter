@@ -66,8 +66,12 @@ class _CheckinScreenState extends State<CheckinScreen> {
   Widget _buildSymptomCheckboxes() {
     return Expanded(
       child: ListView(
-        // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2),
-        children: <Widget>[..._symptomList.map((item) => _buildCheckbox(item: item))],
+        children: <Widget>[
+          _buildCheckbox(name: 'Cough', icon: FlutterIcons.face_mco),
+          _buildCheckbox(name: 'Cough', icon: FlutterIcons.face_mco),
+          _buildCheckbox(name: 'Cough', icon: FlutterIcons.face_mco),
+          _buildCheckbox(name: 'Cough', icon: FlutterIcons.face_mco),
+        ],
       ),
     );
   }
@@ -83,48 +87,21 @@ class _CheckinScreenState extends State<CheckinScreen> {
   }
 
   // todo: extract into shared widget
-  Widget _buildCheckbox({@required Symptom item}) {
-    return GestureDetector(
-      onTap: () => setState(() => toggleSelected(item, !item.isChecked)),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Icon(item.icon),
-          Expanded(
-            child: Text(item.name, textAlign: TextAlign.center, style: Get.theme.textTheme.subtitle),
-          ),
-          Checkbox(
-            value: item.isChecked,
-            activeColor: Get.theme.primaryColor,
-            onChanged: (bool value) => setState(() => toggleSelected(item, value)),
-          ),
-        ],
-      ),
+  Widget _buildCheckbox({@required String name, @required IconData icon}) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Icon(icon),
+        Expanded(
+          child: Text(name, textAlign: TextAlign.center, style: Get.theme.textTheme.subtitle),
+        ),
+        Checkbox(
+          value: false,
+          activeColor: Get.theme.primaryColor,
+          onChanged: (bool value) {},
+        ),
+      ],
     );
   }
-
-  // todo: extract into service
-  // ! Current management requires stateful widget
-
-  List<Symptom> _symptomList = [
-    Symptom(name: 'Cough', icon: FlutterIcons.face_mco),
-    Symptom(name: 'Cough', icon: FlutterIcons.face_mco),
-    Symptom(name: 'Cough', icon: FlutterIcons.face_mco),
-    Symptom(name: 'Cough', icon: FlutterIcons.face_mco),
-  ];
-
-  List<Symptom> get symptomList => _symptomList;
-
-  void toggleSelected(Symptom item, bool value) {
-    item.isChecked = !item.isChecked;
-  }
-}
-
-class Symptom {
-  bool isChecked;
-  String name;
-  IconData icon;
-
-  Symptom({this.isChecked = false, @required this.icon, @required this.name});
 }
