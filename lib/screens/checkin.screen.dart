@@ -86,36 +86,20 @@ class _CheckinScreenState extends State<CheckinScreen> {
   Widget _buildCheckbox({@required Symptom item}) {
     return GestureDetector(
       onTap: () => setState(() => toggleSelected(item, !item.isChecked)),
-      child: Container(
-        margin: EdgeInsets.all(8),
-        padding: EdgeInsets.only(left: 8),
-        decoration:
-            BoxDecoration(border: Border.all(color: Get.theme.disabledColor), borderRadius: BorderRadius.circular(16)),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Icon(
-              item.icon,
-              color: (item.isChecked) ? Get.theme.primaryColor : Get.theme.disabledColor,
-            ),
-            Expanded(
-              child: Text(
-                item.name,
-                textAlign: TextAlign.center,
-                style: Get.theme.textTheme.subtitle
-                    .apply(color: (item.isChecked) ? Get.theme.primaryColor : Get.theme.disabledColor),
-              ),
-            ),
-            Checkbox(
-              value: item.isChecked,
-              activeColor: Get.theme.primaryColor,
-              focusColor: Colors.green,
-              // hoverColor: Colors.green,
-              onChanged: (bool value) => setState(() => toggleSelected(item, value)),
-            ),
-          ],
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Icon(item.icon),
+          Expanded(
+            child: Text(item.name, textAlign: TextAlign.center, style: Get.theme.textTheme.subtitle),
+          ),
+          Checkbox(
+            value: item.isChecked,
+            activeColor: Get.theme.primaryColor,
+            onChanged: (bool value) => setState(() => toggleSelected(item, value)),
+          ),
+        ],
       ),
     );
   }
@@ -124,54 +108,10 @@ class _CheckinScreenState extends State<CheckinScreen> {
   // ! Current management requires stateful widget
 
   List<Symptom> _symptomList = [
-    Symptom(
-      name: 'Cough',
-      icon: FlutterIcons.face_mco,
-    ),
-    Symptom(
-      name: 'Short of Breath',
-      icon: FlutterIcons.ambulance_faw,
-    ),
-    Symptom(
-      name: 'Feeling Ill',
-      icon: FlutterIcons.thermometer_faw,
-    ),
-    Symptom(
-      name: 'Headache',
-      icon: FlutterIcons.keybase_faw5d,
-    ),
-    Symptom(
-      name: 'Body Aches',
-      icon: FlutterIcons.md_body_ion,
-    ),
-    Symptom(
-      name: 'Sore Throat',
-      icon: FlutterIcons.pills_faw5s,
-    ),
-    Symptom(
-      name: 'Weird/No Taste',
-      icon: FlutterIcons.hamburger_faw5s,
-    ),
-    Symptom(
-      name: 'Weird/No Smell',
-      icon: FlutterIcons.flower_ent,
-    ),
-    Symptom(
-      name: 'Vomiting',
-      icon: FlutterIcons.food_off_mco,
-    ),
-    Symptom(
-      name: 'Diarrhea',
-      icon: FlutterIcons.emoticon_poop_mco,
-    ),
-    Symptom(
-      name: 'Sneezing',
-      icon: FlutterIcons.wind_fea,
-    ),
-    Symptom(
-      name: 'Runny Nose',
-      icon: FlutterIcons.run_fast_mco,
-    ),
+    Symptom(name: 'Cough', icon: FlutterIcons.face_mco),
+    Symptom(name: 'Cough', icon: FlutterIcons.face_mco),
+    Symptom(name: 'Cough', icon: FlutterIcons.face_mco),
+    Symptom(name: 'Cough', icon: FlutterIcons.face_mco),
   ];
 
   List<Symptom> get symptomList => _symptomList;
