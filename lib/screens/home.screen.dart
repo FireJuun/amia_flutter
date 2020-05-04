@@ -20,7 +20,6 @@ class HomeScreen extends StatelessWidget {
               title: "Check-In",
               onPressed: () => Get.to(CheckinScreen()),
             ),
-            SharedFirebaseHello(),
           ],
         ),
       ),
