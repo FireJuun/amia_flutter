@@ -1,4 +1,4 @@
-import 'package:amia_flutter/services/services.dart';
+import 'package:amia_flutter/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
