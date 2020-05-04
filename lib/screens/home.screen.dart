@@ -12,16 +12,31 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            SharedActionButton(
+            _actionButton(
               title: 'Dashboard',
               onPressed: () => Get.to(DashboardScreen()),
             ),
-            SharedActionButton(
+            _actionButton(
               title: "Check-In",
               onPressed: () => Get.to(CheckinScreen()),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  _actionButton({String title, void onPressed()}) {
+    return ButtonTheme.fromButtonThemeData(
+      data: Get.theme.buttonTheme.copyWith(
+        minWidth: Get.width / 2,
+      ),
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        elevation: 5.0,
+        padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+        onPressed: onPressed,
+        child: Text(title),
       ),
     );
   }
