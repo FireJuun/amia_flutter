@@ -65,8 +65,8 @@ class _CheckinScreenState extends State<CheckinScreen> {
 
   Widget _buildSymptomCheckboxes() {
     return Expanded(
-      child: GridView(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2),
+      child: ListView(
+        // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2),
         children: <Widget>[..._symptomList.map((item) => _buildCheckbox(item: item))],
       ),
     );
