@@ -34,7 +34,7 @@ class DashboardScreen extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 28.0),
-          child: Text('Good morning, AMIA', style: Get.theme.textTheme.headline, textAlign: TextAlign.center),
+          child: Text('Good morning, AMIA', style: Get.theme.textTheme.display2, textAlign: TextAlign.center),
         ),
         _listItem(
             icon: Icons.check_circle_outline,

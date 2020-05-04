@@ -58,17 +58,27 @@ TextTheme _buildTextTheme() {
     // spec: https://material.io/design/typography/the-type-system.html#type-scale
     // on next stable release of Dart, display4 will be renamed to headline 1,
     // display 3 -> headline2, display2 -> headline3, etc.
+
     display4: _AppTypography.h1,
     display3: _AppTypography.h2,
+    // Dashboard: Good day // Home: Hello world
     display2: _AppTypography.h3,
+    // CheckIn: Please select symptoms
     display1: _AppTypography.h4,
+    // CheckIn: Yesterday, you had..
     headline: _AppTypography.h5,
+    // AppBar
     subhead: _AppTypography.h6,
+    // ListTitle override 1
     title: _AppTypography.subtitle1,
+    // ListTitle override 2
     subtitle: _AppTypography.subtitle2,
+    // Default: Text Widget
     body1: _AppTypography.body1,
     body2: _AppTypography.body2,
+    // Default: Input error text
     caption: _AppTypography.caption,
+    // Default: Button
     button: _AppTypography.button,
     overline: _AppTypography.overline,
   );
@@ -78,27 +88,15 @@ TextTheme _buildTextTheme() {
 class _AppTypography {
   static const TextStyle h1 = TextStyle(fontSize: 96, fontWeight: FontWeight.w100);
   static const TextStyle h2 = TextStyle(fontSize: 60, fontWeight: FontWeight.w100);
-  static const TextStyle h3 = TextStyle(fontSize: 48, fontWeight: FontWeight.normal);
-  static const TextStyle h4 = TextStyle(fontSize: 32, fontWeight: FontWeight.normal);
-
-  // Good day / Hello world text
-  static const TextStyle h5 = TextStyle(fontSize: 32, fontWeight: FontWeight.w800);
-
-  // AppBar
+  static const TextStyle h3 = TextStyle(fontSize: 32, fontWeight: FontWeight.w800);
+  static const TextStyle h4 = TextStyle(fontSize: 24, fontWeight: FontWeight.w800);
+  static const TextStyle h5 = TextStyle(fontSize: 20, fontWeight: FontWeight.w400);
   static const TextStyle h6 = TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
-
-  // ListTitle overrides
   static const TextStyle subtitle1 = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   static const TextStyle subtitle2 = TextStyle(fontSize: 18, fontWeight: FontWeight.w300);
-
-  // Default: Text Widget
   static const TextStyle body1 = TextStyle(fontSize: 30, fontWeight: FontWeight.normal);
   static const TextStyle body2 = TextStyle(fontSize: 14, fontWeight: FontWeight.normal);
-
-  // Default: Input error text
   static const TextStyle caption = TextStyle(fontSize: 12, fontWeight: FontWeight.normal);
-
-  // Default: Button
   static const TextStyle button = TextStyle(fontSize: 20, fontWeight: FontWeight.w400);
   static const TextStyle overline = TextStyle(fontSize: 10, fontWeight: FontWeight.normal);
 }

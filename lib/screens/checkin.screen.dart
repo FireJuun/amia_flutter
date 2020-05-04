@@ -44,18 +44,19 @@ class CheckinScreen extends StatelessWidget {
   }
 
   Widget _buildHeader() {
+    TextTheme _textTheme = Get.theme.textTheme;
     return Column(
       children: <Widget>[
         Text(
           'Please select your symptoms',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+          style: _textTheme.display1,
         ),
         SizedBox(height: 8),
         Text(
           'Yesterday, you had cough, short of breath, and body aches.',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+          style: _textTheme.headline,
         )
       ],
     );
